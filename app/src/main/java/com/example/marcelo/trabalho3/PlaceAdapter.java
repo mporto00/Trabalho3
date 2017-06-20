@@ -49,7 +49,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
         Place place = placeList.get(position);
         holder.tvPlaceName.setText(place.getName());
         holder.tvfavorite.setText(place.getfavorite());
-        holder.ivPlaceImage.setImageResource(place.getPic());
+        //holder.ivPlaceImage.setImageResource(place.getPic());
     }
 
     public void verMapa(){

@@ -17,6 +17,7 @@ import org.w3c.dom.Text;
  */
 
 public class infos extends AppCompatActivity {
+    DBHelper mydb;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,12 +29,17 @@ public class infos extends AppCompatActivity {
         ImageView ivPlaceImage = (ImageView) findViewById(R.id.place_image);
         TextView tvPlaceInfo = (TextView) findViewById(R.id.place_info);
         TextView tvPlaceFavorite = (TextView) findViewById(R.id.place_favorite);
+        Button btFavorito = (Button) findViewById(R.id.bt_favorite);
 
-
+        if (tvPlaceFavorite.getText().toString().equals("Favorito")) {
+            btFavorito.setText("Remover Favorito");
+        } else {
+            btFavorito.setText("Marcar Favorito");
+        }
         tvPlaceName.setText(place.getName());
         tvPlaceInfo.setText(place.getDescription());
         tvPlaceFavorite.setText(place.getfavorite());
-        ivPlaceImage.setImageResource(place.getPic());
+        //ivPlaceImage.setImageResource(place.getPic());
 
 
     }
@@ -47,8 +53,34 @@ public class infos extends AppCompatActivity {
     }
 
     public void setFavorite (View view){
-        TextView tvFavorite = (TextView) findViewById(R.id.place_favorite);
-        tvFavorite.setText("Favorito");
+        TextView tvPlaceName = (TextView) findViewById(R.id.place_name);
+        ImageView ivPlaceImage = (ImageView) findViewById(R.id.place_image);
+        TextView tvPlaceInfo = (TextView) findViewById(R.id.place_info);
+        TextView tvPlaceFavorite = (TextView) findViewById(R.id.place_favorite);
+        Button btFavorito = (Button) findViewById(R.id.bt_favorite);
 
+        String update;
+        if (tvPlaceFavorite.getText().toString().equals("Favorito")) {
+            update = "";
+            btFavorito.setText("Marcar Favorito");
+        } else {
+            update = "Favorito";
+            btFavorito.setText("Remover Favorito");
+        }
+
+        mydb = new DBHelper(this);
+        mydb.updatePlace(tvPlaceName.getText().toString(),update, "", tvPlaceInfo.getText().toString());
+
+        tvPlaceFavorite.setText(update);
+
+        //get intent where the parameters from previus screen was stored
+        Place place = (Place) getIntent().getSerializableExtra("place");
+        place.setfavorite(update);
+
+        //create new intent to send as activity result, setting the user's choices
+        Intent i = new Intent();
+        i.putExtra("place", place);
+        i.putExtra("position", getIntent().getIntExtra("position",0));
+        setResult(RESULT_OK, i);
     }
 }
