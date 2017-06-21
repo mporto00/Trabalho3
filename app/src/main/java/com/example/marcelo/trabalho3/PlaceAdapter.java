@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> {
@@ -25,7 +24,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
             super(v);
             tvPlaceName = (TextView) v.findViewById(R.id.place_name);
             tvfavorite = (TextView) v.findViewById(R.id.favorite);
-            ivPlaceImage = (ImageView) v.findViewById(R.id.iv_album_cover);
+            ivPlaceImage = (ImageView) v.findViewById(R.id.iv_place);
 
         }
     }
@@ -49,7 +48,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
         Place place = placeList.get(position);
         holder.tvPlaceName.setText(place.getName());
         holder.tvfavorite.setText(place.getfavorite());
-        //holder.ivPlaceImage.setImageResource(place.getPic());
+        holder.ivPlaceImage.setImageResource(place.getPic());
     }
 
     public void verMapa(){

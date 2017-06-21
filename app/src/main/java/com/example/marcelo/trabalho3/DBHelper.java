@@ -32,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table places " +
-                        "(name text primary key,favorite text,pic text, description text)"
+                        "(name text primary key,favorite text,pic int, description text)"
         );
     }
 
@@ -42,7 +42,12 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertPlace (String name, String favorite, String pic, String description) {
+    public void destroy() {
+        this.getWritableDatabase().execSQL("DROP TABLE IF EXISTS places");
+        onCreate(this.getWritableDatabase());
+    }
+
+    public boolean insertPlace (String name, String favorite, int pic, String description) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
@@ -70,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", name);
         contentValues.put("favorite", favorite);
-        contentValues.put("pic", pic);
+        //contentValues.put("pic", pic);
         contentValues.put("description", description);
         db.update("places", contentValues, "name = ? ", new String[] { name } );
         return true;

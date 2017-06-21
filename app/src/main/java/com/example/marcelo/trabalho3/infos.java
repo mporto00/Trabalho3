@@ -31,16 +31,16 @@ public class infos extends AppCompatActivity {
         TextView tvPlaceFavorite = (TextView) findViewById(R.id.place_favorite);
         Button btFavorito = (Button) findViewById(R.id.bt_favorite);
 
+        tvPlaceName.setText(place.getName());
+        tvPlaceInfo.setText(place.getDescription());
+        tvPlaceFavorite.setText(place.getfavorite());
+        ivPlaceImage.setImageResource(place.getPic());
+
         if (tvPlaceFavorite.getText().toString().equals("Favorito")) {
             btFavorito.setText("Remover Favorito");
         } else {
             btFavorito.setText("Marcar Favorito");
         }
-        tvPlaceName.setText(place.getName());
-        tvPlaceInfo.setText(place.getDescription());
-        tvPlaceFavorite.setText(place.getfavorite());
-        //ivPlaceImage.setImageResource(place.getPic());
-
 
     }
 

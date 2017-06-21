@@ -11,9 +11,9 @@ public class Place implements Serializable {
     private String name;
     private String favorite;
     private String description;
-    private String pic;
+    private int pic;
 
-    public Place (String name, String favorite, String pic, String description){
+    public Place (String name, String favorite, int pic, String description){
 
         this.name = name;
         this.favorite = favorite;
@@ -31,11 +31,11 @@ public class Place implements Serializable {
         this.name = name;
     }
 
-    public String getPic() {
+    public int getPic() {
         return pic;
     }
 
-    public void setPic(String pic) {
+    public void setPic(int pic) {
         this.pic = pic;
     }
 

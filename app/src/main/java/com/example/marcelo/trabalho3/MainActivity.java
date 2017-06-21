@@ -47,16 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
     String[] favoritos = {"Favorito", "", "Favorito", "Favorito", "", "", ""};
 
-    /*int[] pics = {
+    int[] pics = {
             R.drawable.image1,
             R.drawable.image2,
             R.drawable.image3,
             R.drawable.image4,
             R.drawable.image5,
             R.drawable.image6,
-            R.drawable.image7};*/
+            R.drawable.image7};
 
-    String[] pics = {"0","0","0","0","0","0","0"};
+    //String[] pics = {"0","1","2","3","4","5","6"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +70,15 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mydb = new DBHelper(this);
-        mydb.insertPlace("Praia dos Ingleses", "", "", "A praia dos Ingleses está situada no bairro de Ingleses, norte da ilha de Santa Catarina, no municipio de Florianópolis, capital do estado brasileiro de Santa Catarina.");
-        mydb.insertPlace("Museu de Arte de Santa Catarina", "", "", "Museu de Arte de Santa Catarina é um museu de arte no estado brasileiro de Santa Catarina. O Museu de Arte de Santa Catarina é uma instituição vinculada à Fundação Catarinense de Cultura");
-        mydb.insertPlace("Praia da Joaquina", "", "", "Praia da Joaquina é uma praia oceânica da cidade brasileira de Florianópolis, ao leste da ilha de Santa Catarina, ao sul do Brasil. O ponto procurado por surfistas, já foi sede de alguns campeonatos mundiais de surfe.");
-        mydb.insertPlace("Praia Mole", "", "", "Praia Mole é uma praia ao leste na Ilha de Florianópolis em Santa Catarina. Com uma extensão de 960 metros é muito utilizada para a prática de surf e parapente, devido as suas condições geográficas.");
-        mydb.insertPlace("Praia da Armação do Pântano do Sul", "", "", "A Praia da Armação do Pântano do Sul ou simplesmente Armação é uma praia brasileira situada na cidade de Florianópolis, no estado de Santa Catarina.");
-        mydb.insertPlace("Praia do Santinho", "", "", "A praia do Santinho está situada no distrito de Ingleses do Rio Vermelho, norte da ilha de Santa Catarina, no municipio de Florianópolis, capital do estado brasileiro de Santa Catarina");
-        mydb.insertPlace("Ilha do Campeche", "", "", "Ao leste da Ilha de Santa Catarina, da praia do Campeche, pode-se avistar a ilha do Campeche. Situada no litoral do Estado brasileiro de Santa Catarina, no Oceano Atlântico. Faz parte do território do município de Florianópolis.");
+        //mydb.destroy();
+
+        mydb.insertPlace("Praia dos Ingleses", "", R.drawable.image1, "A praia dos Ingleses está situada no bairro de Ingleses, norte da ilha de Santa Catarina, no municipio de Florianópolis, capital do estado brasileiro de Santa Catarina.");
+        mydb.insertPlace("Museu de Arte de Santa Catarina", "", R.drawable.image2, "Museu de Arte de Santa Catarina é um museu de arte no estado brasileiro de Santa Catarina. O Museu de Arte de Santa Catarina é uma instituição vinculada à Fundação Catarinense de Cultura");
+        mydb.insertPlace("Praia da Joaquina", "", R.drawable.image3, "Praia da Joaquina é uma praia oceânica da cidade brasileira de Florianópolis, ao leste da ilha de Santa Catarina, ao sul do Brasil. O ponto procurado por surfistas, já foi sede de alguns campeonatos mundiais de surfe.");
+        mydb.insertPlace("Praia Mole", "", R.drawable.image4, "Praia Mole é uma praia ao leste na Ilha de Florianópolis em Santa Catarina. Com uma extensão de 960 metros é muito utilizada para a prática de surf e parapente, devido as suas condições geográficas.");
+        mydb.insertPlace("Praia da Armação do Pântano do Sul", "", R.drawable.image5, "A Praia da Armação do Pântano do Sul ou simplesmente Armação é uma praia brasileira situada na cidade de Florianópolis, no estado de Santa Catarina.");
+        mydb.insertPlace("Praia do Santinho", "", R.drawable.image6, "A praia do Santinho está situada no distrito de Ingleses do Rio Vermelho, norte da ilha de Santa Catarina, no municipio de Florianópolis, capital do estado brasileiro de Santa Catarina");
+        mydb.insertPlace("Ilha do Campeche", "", R.drawable.image7, "Ao leste da Ilha de Santa Catarina, da praia do Campeche, pode-se avistar a ilha do Campeche. Situada no litoral do Estado brasileiro de Santa Catarina, no Oceano Atlântico. Faz parte do território do município de Florianópolis.");
 
 
         ArrayList<String> array_places = mydb.getAllPlaces();
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
             String name = populate.getString(populate.getColumnIndex(DBHelper.PLACES_COLUMN_NAME));
             String favorite = populate.getString(populate.getColumnIndex(DBHelper.PLACES_COLUMN_FAVORITE));
-            String pic = populate.getString(populate.getColumnIndex(DBHelper.PLACES_COLUMN_PIC));
+            int pic = populate.getInt(populate.getColumnIndex(DBHelper.PLACES_COLUMN_PIC));
             String description = populate.getString(populate.getColumnIndex(DBHelper.PLACES_COLUMN_DESCRIPTION));
 
             Place place = new Place(name, favorite, pic, description);
